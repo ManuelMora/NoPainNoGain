@@ -25,6 +25,7 @@ nivel
 
 - Usuario:
 GET /usuario/login/ // Requiere Basic Auth
+GET /usuarios/sede/{codigo_sede}
 POST /usuario/registro
 
 - Ciudad
@@ -32,4 +33,3 @@ POST /ciudad/
 
 - Sede
 POST /sede/
-GET /sede/usuarios

@@ -32,6 +32,19 @@ class DataBase{
         });
     }
 
+    getUsuariosSede(codigo_sede) {
+        const selectUsuariosSede = `SELECT * FROM usuario AS us WHERE us.codigo_sede = ${this.conn.escape(codigo_sede)};`;
+
+        return new Promise((resuelve, rechazo) => {
+            this.conn.query(selectUsuariosSede, (error, resultado) => {
+                if(error)
+                    rechazo(error);
+                
+                resuelve(resultado);
+            });
+        });
+    }
+
     crearUsuario(usuario) {
         const insertUsuario = `INSERT INTO usuario (dni, codigo_nivel, codigo_sede, alias, nombre, apellido, pass)
         VALUES (${this.conn.escape(usuario.dni)}, ${NIVEL_USUARIO_CLIENTE}, ${this.conn.escape(usuario.codigo_sede)},

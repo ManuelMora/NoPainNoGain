@@ -46,6 +46,19 @@ class Usuario {
             })
             .catch(error => res.status(500).json({"error": error.message}));
     }
+
+    getUsuariosSede(req, res) {
+        this.database.getUsuarioToken(req.header('token'))
+            .then(resultado => {
+                if(resultado.length == 1 && resultado[0].nombre_nivel == 'administrador')
+                    this.database.getUsuariosSede(req.params.codigo_sede)
+                        .then(resultado => res.status(200).json(resultado))
+                        .catch(error => res.status(500).json({"error": error.message}));
+                else
+                    res.status(401).json({'error':'El usuario no tiene los permisos necesarios para realizar la accion'});
+            })
+            .catch(error => res.status(500).json({"error": error.message}));
+    }
 }
 
 module.exports = new Usuario(database);
