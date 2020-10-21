@@ -32,6 +32,20 @@ class Usuario {
             });
         
     }
+
+    crearUsuario(req, res) {
+        this.database.crearUsuario(req.body)
+            .then(resultado => {
+                this.database.getUsuario(req.body.alias, req.body.pass)
+                .then(resultado => {
+                    res.status(200).json(resultado[0]);
+                })
+                .catch(error => {
+                    res.status(500).json({'error': error.message});
+                });
+            })
+            .catch(error => res.status(500).json({"error": error.message}));
+    }
 }
 
 module.exports = new Usuario(database);

@@ -5,11 +5,12 @@ const conn = mysql.createConnection({
     password:'123456',
     database: 'no_pain_no_gain'
 });
-
 conn.connect(err => {
     if(err) throw err;
     console.log('Connected!');
 });
+
+const NIVEL_USUARIO_CLIENTE = 2;
 
 class DataBase{
     constructor(conn) {
@@ -26,6 +27,22 @@ class DataBase{
                 if(error) 
                     rechazo(error);
     
+                resuelve(resultado);
+            });
+        });
+    }
+
+    crearUsuario(usuario) {
+        const insertUsuario = `INSERT INTO usuario (dni, codigo_nivel, codigo_sede, alias, nombre, apellido, pass)
+        VALUES (${this.conn.escape(usuario.dni)}, ${NIVEL_USUARIO_CLIENTE}, ${this.conn.escape(usuario.codigo_sede)},
+        ${this.conn.escape(usuario.alias)}, ${this.conn.escape(usuario.nombre)}, ${this.conn.escape(usuario.apellido)},
+        AES_ENCRYPT(${this.conn.escape(usuario.pass)}, ${this.conn.escape(usuario.alias)}));`;
+
+        return new Promise((resuelve, rechazo) =>  {
+            this.conn.query(insertUsuario, (error, resultado) => {
+                if(error)
+                    rechazo(error);
+                
                 resuelve(resultado);
             });
         });
