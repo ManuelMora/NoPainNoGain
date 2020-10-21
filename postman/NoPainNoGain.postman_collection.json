@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "1a51c650-e11d-4799-9bf4-28259d466478",
+		"name": "NoPainNoGain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "velka",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuario/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"login"
+					]
+				},
+				"description": "Inicio de sesion de un usuario.\r\nSe espera que retorne el token de la sesion\r\ncon un TTL de dos horas"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Ciudad",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "ca7dec787805f63378d876ebf8e4353cf762f7ca09fcdc6906f2b76aec26dc1d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Cali\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ciudad/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ciudad",
+						""
+					]
+				},
+				"description": "Crear un recurso ciudad utilizando un token de sesión\r\nvalido en el header de la peticion.\r\nLos nombres de las ciudades estan restringidos en la \r\nbase de datos por un index unico."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Sede",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "ca7dec787805f63378d876ebf8e4353cf762f7ca09fcdc6906f2b76aec26dc1d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo_ciudad\":1,\r\n    \"nombre\":\"Sede Principal\",\r\n    \"direccion\":\"Cll 123 #1-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/sede/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"sede",
+						""
+					]
+				},
+				"description": "Crear un recurso ciudad utilizando un token de sesión\r\nvalido en el header de la peticion."
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dni\": 1000000001,\r\n    \"codigo_sede\": 2,\r\n    \"alias\": \"usr1\",\r\n    \"nombre\": \"Usuario\",\r\n    \"apellido\": \"Primero\",\r\n    \"pass\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						""
+					]
+				},
+				"description": "Registrar un usuario en la API.\r\nSolo pueden registrarse usuario de nivel usuario.\r\nNo es necesarion un token de sesion.\r\nEl usuario es unico en el sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuario Sede",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "ca7dec787805f63378d876ebf8e4353cf762f7ca09fcdc6906f2b76aec26dc1d",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/usuario/sede/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"sede",
+						"2"
+					]
+				},
+				"description": "Listar los usuario registrados en una sede determinada.\r\nEs necesario suministrar un token de sesion valido"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123456",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "velka",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
