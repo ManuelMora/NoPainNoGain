@@ -7,6 +7,7 @@ class Server {
     constructor() {
         this.app = null;
         this.recursosGet = new Map();
+        this.recursosPost = new Map();
     }
 
     agregarRecursoGet(ruta, funcion) {
@@ -15,9 +16,17 @@ class Server {
 
     conectar() {
         this.app = express();
+        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+
         for (const recursoGet of this.recursosGet) {
             this.app.get(recursoGet[0], recursoGet[1]);
         }
+
+        for (const recursoPost of this.recursosPost) {
+            this.app.post(recursoPost[0], recursoPost[1]);
+        }
+
         this.app.listen(PORT, HOST);
     }
 }
