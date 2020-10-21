@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const HOST = '0.0.0.0';
 const PORT = 3000;
@@ -12,6 +13,10 @@ class Server {
 
     agregarRecursoGet(ruta, funcion) {
         this.recursosGet.set(ruta, funcion);
+    }
+
+    agregarRecursoPost(ruta, funcion) {
+        this.recursosPost.set(ruta, funcion);
     }
 
     conectar() {
