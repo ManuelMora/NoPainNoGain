@@ -2,7 +2,7 @@
   "name": "nopainnogain",
   "version": "1.0.0",
   "description": "API  usuarios y sedes de No Pain No Gain",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "none"
   },
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ManuelMora/NoPainNoGain#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   }
 }
