@@ -1,0 +1,27 @@
+{
+  "name": "nopainnogain",
+  "version": "1.0.0",
+  "description": "API  usuarios y sedes de No Pain No Gain",
+  "main": "server.js",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuelMora/NoPainNoGain.git"
+  },
+  "keywords": [
+    "API",
+    "usuarios",
+    "sedes"
+  ],
+  "author": "Manuel Alfonso Mora  Montagut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManuelMora/NoPainNoGain/issues"
+  },
+  "homepage": "https://github.com/ManuelMora/NoPainNoGain#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
