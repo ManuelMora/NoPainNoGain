@@ -1,18 +1,22 @@
 const database = require('./modelo/database');
-const usuario = require('./usuario');
 
-class Ciudad {
+class Sede {
     constructor(database) {
         this.database = database;
     }
 
-    crearCiudad(req, res) {
+    crearSede(req, res) {
         this.database.getUsuarioToken(req.header('token'))
             .then(resultado => {
                 if(resultado.length == 1 && resultado[0].nombre_nivel == 'administrador')
-                    this.database.crearCiudad(req.body)
+                    this.database.crearSede(req.body)
                         .then(resultado => {
-                            res.status(200).json({'codigo':resultado.insertId, 'nombre':req.body.nombre});
+                            res.status(200).json({
+                                'codigo':resultado.insertId, 
+                                'codigo_ciudad':req.body.codigo_ciudad,
+                                'nombre':req.body.nombre,
+                                'direccion':req.body.direccion
+                            });
                         })
                         .catch(error => res.status(500).json({'error':error.message}));
                 else
@@ -22,4 +26,4 @@ class Ciudad {
     }
 }
 
-module.exports = new Ciudad(database);
+module.exports = new Sede(database);
