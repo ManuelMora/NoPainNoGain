@@ -31,9 +31,27 @@ class DataBase{
         });
     }
 
+    getUsuario(token) {
+        const selectUsuario = `SELECT us.*, niv.nombre AS nombre_nivel
+        FROM usuario AS us
+        INNER JOIN nivel AS niv ON niv.codigo = us.codigo_nivel
+        INNER JOIN token AS tok ON tok.dni_usuario = us.dni
+        WHERE token = ${conn.escape(token)}
+            AND NOW() < DATE_ADD(tok.fecha,INTERVAL 120 MINUTE);`;
+
+        return new Promise((resuelve, rechazo) => {
+            this.conn.query(selectUsuario, (error, resultado) => {
+                if(error) 
+                    rechazo(error);
+                
+                resuelve(resultado);
+            })
+        });
+    }
+
     crearSesion(usuario) {
         const insertSesion = `INSERT INTO token (dni_usuario, token) 
-            VALUES (${conn.escape(usuario.dni)}, SHA2(NOW(), 256));`;
+            VALUES (${this.conn.escape(usuario.dni)}, SHA2(NOW(), 256));`;
         return new Promise((resuelve, rechazo) => {
             this.conn.query(insertSesion, (error, resultado) => {
                 if (error)
@@ -48,7 +66,7 @@ class DataBase{
 
     getSesion(usuario) {
         const selectSesion = `SELECT * FROM token 
-        WHERE dni_usuario = ${conn.escape(usuario.dni)} AND NOW() < DATE_ADD(fecha,INTERVAL 120 MINUTE)
+        WHERE dni_usuario = ${this.conn.escape(usuario.dni)} AND NOW() < DATE_ADD(fecha,INTERVAL 120 MINUTE)
         ORDER BY fecha LIMIT 1;`;
 
         return new Promise((resuelve, rechazo) => {
@@ -62,6 +80,19 @@ class DataBase{
                     rechazo({'message':'No se encontraron sesiones activas'});
             });
         });
+    }
+
+    crearCiudad(ciudad) {
+        const insertCiudad = `INSERT INTO ciudad (nombre) VALUES (${this.conn.escape(ciudad.nombre)});`;
+
+        return new Promise((resuelve, rechazo) => {
+            this.conn.query(insertCiudad, (error, resultado) => {
+                if(error)
+                    rechazo(error);
+                
+                resuelve(resultado);
+            });
+        })
     }
 }
 
