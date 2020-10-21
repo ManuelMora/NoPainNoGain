@@ -7,7 +7,7 @@ class Ciudad {
     }
 
     crearCiudad(req, res) {
-        this.database.getUsuario(req.header('token'))
+        this.database.getUsuarioToken(req.header('token'))
             .then(resultado => {
                 if(resultado.length == 1 && resultado[0].nombre_nivel == 'administrador')
                     this.database.crearCiudad(req.body)
