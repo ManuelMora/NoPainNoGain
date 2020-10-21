@@ -4,6 +4,7 @@ const ciudad = require('./src/ciudad');
 const sede = require('./src/sede');
 
 server.agregarRecursoGet('/usuario/login', (req, res) => usuario.login(req, res));
+server.agregarRecursoGet('/usuario/sede/:codigo_sede', (req, res) => usuario.getUsuariosSede(req,res));
 
 server.agregarRecursoPost('/ciudad/', (req, res) => ciudad.crearCiudad(req, res));
 server.agregarRecursoPost('/sede/', (req, res) => sede.crearSede(req, res));
