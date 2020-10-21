@@ -31,7 +31,7 @@ class DataBase{
         });
     }
 
-    getUsuario(token) {
+    getUsuarioToken(token) {
         const selectUsuario = `SELECT us.*, niv.nombre AS nombre_nivel
         FROM usuario AS us
         INNER JOIN nivel AS niv ON niv.codigo = us.codigo_nivel
@@ -93,6 +93,22 @@ class DataBase{
                 resuelve(resultado);
             });
         })
+    }
+
+    crearSede(sede) {
+        const insertSede = `INSERT INTO sede (codigo_ciudad, nombre, direccion)
+            VALUES (${this.conn.escape(sede.codigo_ciudad)}, 
+                ${this.conn.escape(sede.nombre)},
+                ${this.conn.escape(sede.direccion)});`;
+
+        return new Promise((resuelve, rechazo) => {
+            this.conn.query(insertSede, (error, resultado) => {
+                if(error)
+                    rechazo(error);
+                
+                resuelve(resultado);
+            });
+        });
     }
 }
 
