@@ -23,10 +23,8 @@ nivel
 
 ## URI:
 
-- Administrador:
-POST /admin/login/
-
-- Usuario Normal:
+- Usuario:
+GET /usuario/login/ // Requiere Basic Auth
 POST /usuario/registro
 
 - Ciudad
