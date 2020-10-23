@@ -5,6 +5,8 @@ const alias = 'velka';
 const pass = '123456';
 
 test('Convetir', () => {
-    expect(parseAliasPass(aliasPassBase64)['alias']).toBe(alias);
-    expect(parseAliasPass(aliasPassBase64)['pass']).toBe(pass);
+    expect(parseAliasPass(aliasPassBase64)).toEqual({
+        "alias":alias,
+        "pass":pass
+    });
 });
