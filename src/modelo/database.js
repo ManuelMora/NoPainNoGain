@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host:'localhost',
+    host:'nopainnogaindb',
     user:'root',
     password:'123456',
     database: 'no_pain_no_gain'

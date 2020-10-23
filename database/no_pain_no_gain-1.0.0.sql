@@ -13,7 +13,6 @@
 
 
 -- Volcando estructura de base de datos para no_pain_no_gain
-DROP DATABASE IF EXISTS `no_pain_no_gain`;
 CREATE DATABASE IF NOT EXISTS `no_pain_no_gain` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `no_pain_no_gain`;
 
@@ -114,3 +113,6 @@ INSERT IGNORE INTO `usuario` (`dni`, `codigo_nivel`, `codigo_sede`, `alias`, `no
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '123456';
+flush privileges;
