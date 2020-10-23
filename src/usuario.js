@@ -1,4 +1,3 @@
-const database = require('./modelo/database');
 const { parseAliasPass } = require('./util');
 
 class Usuario {
@@ -61,4 +60,4 @@ class Usuario {
     }
 }
 
-module.exports = new Usuario(database);
+module.exports = Usuario;

@@ -1,5 +1,3 @@
-const database = require('./modelo/database');
-
 class Sede {
     constructor(database) {
         this.database = database;
@@ -26,4 +24,4 @@ class Sede {
     }
 }
 
-module.exports = new Sede(database);
+module.exports = Sede;

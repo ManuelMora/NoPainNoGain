@@ -1,6 +1,3 @@
-const database = require('./modelo/database');
-const usuario = require('./usuario');
-
 class Ciudad {
     constructor(database) {
         this.database = database;
@@ -22,4 +19,4 @@ class Ciudad {
     }
 }
 
-module.exports = new Ciudad(database);
+module.exports = Ciudad;
